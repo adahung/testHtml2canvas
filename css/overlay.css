@@ -1,0 +1,13 @@
+#snapshot-overlay {
+	position: fixed;
+	width: 50%;
+	height: 50%;
+	margin: auto;
+	display: none;
+
+	box-shadow: 0 2px 1px rgba(0,0,0,0.1),0 0 1px rgba(0,0,0,0.1);
+}
+
+#snapshot-overlay img {
+	width: 300px;
+}
