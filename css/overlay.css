@@ -1,11 +1,19 @@
 #snapshot-overlay {
 	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+
 	width: 50%;
-	height: 50%;
+	min-width: 300px;
+	height: auto;
+	max-height: 90%;
 	margin: auto;
 	display: none;
 
-	box-shadow: 0 2px 1px rgba(0,0,0,0.1),0 0 1px rgba(0,0,0,0.1);
+	box-shadow: 3px 3px 1px rgba(0,0,0,0.1),0 0 1px rgba(0,0,0,0.1);
+	overflow: hidden;
 }
 
 #snapshot-overlay img {
