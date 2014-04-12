@@ -19,7 +19,7 @@ YUI().use('node', 'json-stringify', function(Y) {
 		canvasObj.width = canvas.getAttribute('width');
 
 		// show overlay with the snapshot
-		overlay = Y.one('#snapshot-overlay');
+		overlay = Y.one('#snapshot-overlay-wrapper');
 		overlay.one('img').setAttribute('src', canvasObj.dataUri);
 		overlay.setStyle('display', 'block');
 	}

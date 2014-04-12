@@ -1,18 +1,24 @@
-#snapshot-overlay {
-	position: fixed;
+#snapshot-overlay-wrapper {
+	display: none;
+	position: absolute;
 	left: 0;
 	right: 0;
 	top: 0;
 	bottom: 0;
 
+	height: auto;
+	width: auto;
+	background-color: rgba(0, 0, 0, .4);
+}
+#snapshot-overlay {
 	width: 50%;
 	min-width: 300px;
-	height: auto;
+	height: 60%;
 	max-height: 90%;
-	margin: auto;
-	display: none;
+	margin: 100px auto 40px;
 
-	box-shadow: 3px 3px 1px rgba(0,0,0,0.1),0 0 1px rgba(0,0,0,0.1);
+	background-color: #fff;
+	box-shadow: 0 2px 26px rgba(0, 0, 0, .3), 0 0 0 1px rgba(0, 0, 0, .1);
 	overflow: hidden;
 }
 
