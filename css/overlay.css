@@ -1,6 +1,6 @@
 #snapshot-overlay-wrapper {
 	display: none;
-	position: absolute;
+	position: fixed;
 	left: 0;
 	right: 0;
 	top: 0;
@@ -9,19 +9,97 @@
 	height: auto;
 	width: auto;
 	background-color: rgba(0, 0, 0, .4);
+	z-index: 100;
+
+	font-size: 13px;
 }
 #snapshot-overlay {
-	width: 50%;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+
+	width: 80%;
 	min-width: 300px;
-	height: 60%;
-	max-height: 90%;
-	margin: 100px auto 40px;
+	height: 80%;
+	min-height: 400px;
+	margin: auto;
 
 	background-color: #fff;
 	box-shadow: 0 2px 26px rgba(0, 0, 0, .3), 0 0 0 1px rgba(0, 0, 0, .1);
-	overflow: hidden;
+	overflow-y: scroll;
 }
 
-#snapshot-overlay img {
-	width: 300px;
+#snapshot-info {
+	padding: 0;
+	margin: 0;
 }
+
+.snapshot-info-item {
+	/*height: 40px;*/
+	border-bottom: 1px solid #e2e2e6;
+	padding: 10px 60px 10px 10px;
+	line-height: 20px;
+
+	position: relative;
+	overflow: hidden;
+}
+.snapshot-info-item > div {
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.snapshot-info-item .label {
+	font-weight: 300;
+}
+.snapshot-info-item .edit,
+.snapshot-info-item .geo {
+	position: absolute;
+	right: 10px;
+	top: 4px;
+	border: 1px solid #e2e2e6;
+	border-radius: 2px;
+	padding: 5px 10px;
+	cursor: pointer;
+
+	font-weight: 300;
+	font-size: 12px;
+}
+
+.snapshot-info-item .edit:hover,
+.snapshot-info-item .geo:hover {
+	background-color: #eee;
+}
+
+#snapshot-info-img img {
+	width: 100%;
+}
+
+.snapshot-info-item.editbox textarea {
+	width: 100%;
+}
+
+#snapshot-actn {
+	position: absolute;
+	top: 91%;
+	left: 0;
+	right: 0;
+	margin: auto;
+	width: 100px;
+}
+
+#snapshot-submit {
+	border: none;
+	border-radius: 2px;
+	background-color: #3261c3;
+	height: 38px;
+	color: #fff;
+	padding: 5px 10px;
+
+	-webkit-appearance: none;
+	cursor: pointer;
+}
+
+
+
+

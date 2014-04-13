@@ -1,5 +1,7 @@
 <html>
 <head>
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.16.0-rc-1/build/cssreset/cssreset-min.css">
+	<link rel="stylesheet" type="text/css" href="./css/normalize.css">
 	<link rel="stylesheet" type="text/css" href="./css/overlay.css">
 	<script src="http://yui.yahooapis.com/3.16.0/build/yui/yui-min.js"></script>
 	<script src="./js/html2canvas.js"></script>
@@ -9,9 +11,46 @@
 	<input id="snapshot" type="button" value="Snapshot"></input>
 	<div id="snapshot-overlay-wrapper">
 		<div id="snapshot-overlay">
-			<img/>
+			<div id="snapshot-info">
+				<div id="snapshot-info-qry" class="snapshot-info-item">
+					<div>
+						<span class="label">Query:</span>
+						<span class="value"></span>
+					</div>
+					<!--div class="edit">Edit</div-->
+				</div>
+				<div id="snapshot-info-loc" class="snapshot-info-item">
+					<div>
+						<span class="label">Location:</span>
+						<span class="value"></span>
+					</div>
+					<div class="geo">Geo</div>
+				</div>
+				<div id="snapshot-info-usr" class="snapshot-info-item">
+					<div>
+						<span class="label">Backyard id:</span>
+						<span class="value"></span>
+					</div>
+					<div class="edit">Edit</div>
+				</div>
+				<div id="snapshot-info-desc" class="snapshot-info-item">
+					<div>
+						<span class="label">Description:</span>
+						<span class="value"></span>
+					</div>
+					<div class="edit">Edit</div>
+				</div>
+				<div id="snapshot-info-img">
+					<img/>
+				</div>
+			</div>
+		</div>
+		<div id="snapshot-actn">
+			<input id="snapshot-submit" type="submit" value="Send feedback" />
 		</div>
 	</div>
+<script>Y = YUI();</script>
+<script src="./js/snapshot-info.js"></script>
 <script src="./js/snapshot.js"></script>
 </body>
 </html>
