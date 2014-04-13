@@ -1,5 +1,5 @@
 //YUI().use('node', 'json-stringify', function(Y) {
-Y.use('node', 'event', 'json-stringify', 'json-parse', function(Y) {
+Y.use('node', 'event', 'json-stringify', 'json-parse', 'io', function(Y) {
 
 	Y.one('#snapshot').on('click', function(e) {
 		console.log('snapshot');
@@ -117,9 +117,24 @@ Y.use('node', 'event', 'json-stringify', 'json-parse', function(Y) {
 	}
 
 	function sendFeedback() {
-		alert('send feedback!');
+/*		alert('send feedback!');
+		var jData = {a: 1, b: 2};
 
-		location.replace(location.href);
+		Y.io('http://localhost/api.php', {
+		  method: 'POST',
+		  data: Y.JSON.stringify(jData),
+		  headers: {
+		    'Content-Type': 'application/json'
+		  },
+		  on: {
+		    success: function (id, response) {
+		      // do something with the response from the server, for example
+		      alert('success');
+		    }
+		  }
+		});
+*/
+		//location.replace(location.href);
 	}
 
 	function setGeolocationIntoLocField(coords) {
