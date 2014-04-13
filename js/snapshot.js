@@ -135,6 +135,7 @@ Y.use('node', 'event', 'json-stringify', 'json-parse', function(Y) {
 		});
 */
 		//location.replace(location.href);
+		Y.one('#snapshot-overlay-wrapper').setStyle('display', 'none');
 	}
 
 	function setGeolocationIntoLocField(coords) {
