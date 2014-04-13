@@ -95,10 +95,11 @@
 	left: 0;
 	right: 0;
 	margin: auto;
-	width: 100px;
+	width: 180px;
 }
 
-#snapshot-submit {
+#snapshot-submit,
+#snapshot-cancel {
 	border: none;
 	border-radius: 2px;
 	background-color: #3261c3;
@@ -108,7 +109,14 @@
 
 	-webkit-appearance: none;
 	cursor: pointer;
+	display: inline-block;
 }
+#snapshot-cancel {
+	border: 1px solid #3261c3;
+	background-color: #fff;
+	color: #3261c3;
+}
+
 
 
 

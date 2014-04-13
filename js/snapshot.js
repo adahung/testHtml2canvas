@@ -4,6 +4,7 @@ Y.use('node', 'event', 'json-stringify', 'json-parse', function(Y) {
 	Y.one('#snapshot').on('click', function(e) {
 		console.log('snapshot');
 		e.halt();
+		Y.one('#snapshot').setStyle('display', 'none');
 		snapshot();
 	});
 
@@ -28,10 +29,12 @@ Y.use('node', 'event', 'json-stringify', 'json-parse', function(Y) {
 		overlay.one('#snapshot-info-img img').setAttribute('src', canvasObj.dataUri);
 
 		populateSnapshotInfo();
-		overlay.setStyle('display', 'block');
-
+		
 		// bind overlay events
 		bindOverlayEvents();
+
+		// show overlay
+		overlay.setStyle('display', 'block');
 	}
 
 	function populateSnapshotInfo() {
@@ -114,6 +117,12 @@ Y.use('node', 'event', 'json-stringify', 'json-parse', function(Y) {
 
 		// bind send feedback event
 		Y.one('#snapshot-submit').on('click', sendFeedback);
+		Y.one('#snapshot-cancel').on('click', cancelFeedback);
+	}
+
+	function cancelFeedback() {
+		Y.one('#snapshot-overlay-wrapper').setStyle('display', 'none');
+		Y.one('#snapshot').setStyle('display', 'block');
 	}
 
 	function sendFeedback() {
@@ -136,6 +145,7 @@ Y.use('node', 'event', 'json-stringify', 'json-parse', function(Y) {
 */
 		//location.replace(location.href);
 		Y.one('#snapshot-overlay-wrapper').setStyle('display', 'none');
+		Y.one('#snapshot').setStyle('display', 'block');
 	}
 
 	function setGeolocationIntoLocField(coords) {
