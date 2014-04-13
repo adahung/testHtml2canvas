@@ -1,5 +1,5 @@
 //YUI().use('node', 'json-stringify', function(Y) {
-Y.use('node', 'event', 'json-stringify', 'json-parse', 'io', function(Y) {
+Y.use('node', 'event', 'json-stringify', 'json-parse', function(Y) {
 
 	Y.one('#snapshot').on('click', function(e) {
 		console.log('snapshot');
