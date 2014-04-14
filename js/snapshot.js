@@ -28,20 +28,30 @@ Y.use('node', 'event', 'json-stringify', 'json-parse', function(Y) {
             onrendered: function(canvas) {
                 console.log('rendered');
                 afterSnapshot(canvas);
-            }
+            },
+            //proxy: 'http://...',
+            //useCORS: true,
+            allowTaint: true,
+            logging: true
         });
     }
 
     function afterSnapshot(canvas) {
         var canvasObj = {},
-            overlay;
+            overlay,
+            img;
         canvasObj.dataUri = canvas.toDataURL();
         canvasObj.height = canvas.getAttribute('height');
         canvasObj.width = canvas.getAttribute('width');
 
         // show overlay with the snapshot
         overlay = Y.one('#snapshot-overlay-wrapper');
+        if (!overlay.one('#snapshot-info-img img')) {
+            img = Y.Node.create('<img/>');
+            overlay.one('#snapshot-info-img').appendChild(img);
+        }
         overlay.one('#snapshot-info-img img').setAttribute('src', canvasObj.dataUri);
+        
 
         populateSnapshotInfo();
         
@@ -93,29 +103,7 @@ Y.use('node', 'event', 'json-stringify', 'json-parse', function(Y) {
     function bindOverlayEvents() {
         // bind edit button click events
         Y.all('.snapshot-info-item .edit').each(function(item) {
-            item.on('click', function(e) {
-                console.log('edit click');
-                var editBtn = e.currentTarget,
-                    targetItem = editBtn.ancestor('.snapshot-info-item'),
-                    editboxClass = 'editbox',
-                    targetNextItem = targetItem.next();
-                    
-                if (!targetNextItem.hasClass(editboxClass)) {
-                    editBtn.set('text', 'Done');
-
-                    // render edit box
-                    var editbox = Y.Node.create('<div class="snapshot-info-item ' + editboxClass + '"><textarea></textarea></div>');
-                    editbox.one('textarea').set('value', targetItem.one('.value').get('text'));
-                    targetItem.insert(editbox, 'after');
-                }
-                else {
-                    editBtn.set('text', 'Edit');
-                    handleEditboxData(targetItem, targetNextItem.one('textarea'));
-
-                    // remove and destory editbox
-                    targetNextItem.remove(true);
-                }
-            });
+            item.on('click', handleEditEvent);
         });
 
         // bind geo button click
@@ -125,8 +113,38 @@ Y.use('node', 'event', 'json-stringify', 'json-parse', function(Y) {
         });
 
         // bind send feedback event
+        Y.one('#snapshot-copy').on('click', copyFeedback);
         Y.one('#snapshot-submit').on('click', sendFeedback);
         Y.one('#snapshot-cancel').on('click', cancelFeedback);
+    }
+
+    function handleEditEvent(e) {
+        console.log('edit click');
+        var editBtn = e.currentTarget,
+            targetItem = editBtn.ancestor('.snapshot-info-item'),
+            editboxClass = 'editbox',
+            targetNextItem = targetItem.next();
+            
+        if (!targetNextItem.hasClass(editboxClass)) {
+            editBtn.set('text', 'Done');
+
+            // render edit box
+            var editbox = Y.Node.create('<div class="snapshot-info-item ' + editboxClass + '"><textarea></textarea></div>');
+            editbox.one('textarea').set('value', targetItem.one('.value').get('text'));
+            targetItem.insert(editbox, 'after');
+        }
+        else {
+            editBtn.set('text', 'Edit');
+            handleEditboxData(targetItem, targetNextItem.one('textarea'));
+
+            // remove and destory editbox
+            targetNextItem.remove(true);
+        }
+    }
+
+    function copyFeedback() {
+        alert('Feedback is copied!');
+        showInternalComponent();
     }
 
     function cancelFeedback() {

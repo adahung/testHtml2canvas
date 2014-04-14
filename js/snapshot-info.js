@@ -1,8 +1,8 @@
-YSnapShotInfo = {
+window.YSnapShotInfo = {
     query: 'Cherng',
     srp: '...',
     url: '...',
-    mrkt: '...',
+    mrkt: 'TW',
     tid: '...',
     loc: {
         ip: '118.165.102.86',

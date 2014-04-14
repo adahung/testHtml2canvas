@@ -2208,6 +2208,7 @@ _html2canvas.Preload = function( options ) {
 
   function start(){
     Util.log("html2canvas: start: images: " + images.numLoaded + " / " + images.numTotal + " (failed: " + images.numFailed + ")");
+
     if (!images.firstRun && images.numLoaded >= images.numTotal){
       Util.log("Finished loading images: # " + images.numTotal + " (failed: " + images.numFailed + ")");
 
@@ -2479,6 +2480,7 @@ _html2canvas.Preload = function( options ) {
   Util.log('html2canvas: Preload: Finding images');
   // load <img> images
   for (i = 0; i < imgLen; i+=1){
+    Util.log(domImages[i].getAttribute( "src" ));
     methods.loadImage( domImages[i].getAttribute( "src" ) );
   }
 

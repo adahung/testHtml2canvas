@@ -117,7 +117,8 @@
 }
 
 #snapshot-submit,
-#snapshot-cancel {
+#snapshot-cancel,
+#snapshot-copy {
     border: none;
     border-radius: 2px;
     background-color: #3261c3;
@@ -129,8 +130,13 @@
     cursor: pointer;
     display: inline-block;
 }
-#snapshot-cancel {
+#snapshot-cancel,
+#snapshot-copy {
     border: 1px solid #3261c3;
     background-color: #fff;
-    color: #3261c3;
+    color: #000;
+}
+#snapshot-cancel:hover,
+#snapshot-copy:hover {
+    background-color: #eee;
 }
