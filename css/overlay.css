@@ -38,13 +38,15 @@
 
     font-size: 13px;
 }
-#snapshot-overlay {
+#snapshot-overlay,
+#snapshot-detail-view {
     position: absolute;
     left: 0;
     right: 0;
     top: 0;
     bottom: 0;
 
+    box-sizing: border-box;
     width: 80%;
     min-width: 300px;
     height: 80%;
@@ -112,17 +114,20 @@
     top: 91%;
     left: 0;
     right: 0;
+    
     margin: auto;
-    width: 250px;
+    width: 220px;
 }
 
 #snapshot-submit,
 #snapshot-cancel,
-#snapshot-copy {
+#snapshot-view,
+#snapshot-detail-view button {
     border: none;
     border-radius: 2px;
     background-color: #3261c3;
     height: 38px;
+    width: 60px;
     color: #fff;
     padding: 5px 10px;
 
@@ -130,13 +135,25 @@
     cursor: pointer;
     display: inline-block;
 }
+#snapshot-detail-view button {
+    margin-top: 15px;
+}
 #snapshot-cancel,
-#snapshot-copy {
+#snapshot-view{
     border: 1px solid #3261c3;
     background-color: #fff;
     color: #000;
 }
 #snapshot-cancel:hover,
-#snapshot-copy:hover {
+#snapshot-view:hover {
     background-color: #eee;
+}
+
+#snapshot-detail-view {
+    display: none;
+    padding: 10px;
+}
+
+#snapshot-detail-view .info li {
+    padding-bottom: 5px;
 }

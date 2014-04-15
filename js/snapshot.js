@@ -13,12 +13,12 @@ Y.use('node', 'event', 'json-stringify', 'json-parse', function(Y) {
     });
 
     function hideInternalComponent() {
-        //Y.one('#snapshot').setStyle('display', 'none');
+        Y.one('#snapshot').setStyle('display', 'none');
         Y.all('#feedback > div').setStyle('display', 'none');
     }
 
     function showInternalComponent() {
-        // Y.one('#snapshot').setStyle('display', 'block');
+        Y.one('#snapshot').setStyle('display', 'block');
         Y.all('#feedback > div').setStyle('display', 'block');
         Y.one('#snapshot-overlay-wrapper').setStyle('display', 'none');
     }
@@ -113,9 +113,13 @@ Y.use('node', 'event', 'json-stringify', 'json-parse', function(Y) {
         });
 
         // bind send feedback event
-        Y.one('#snapshot-copy').on('click', copyFeedback);
+        Y.one('#snapshot-view').on('click', viewFeedback);
         Y.one('#snapshot-submit').on('click', sendFeedback);
         Y.one('#snapshot-cancel').on('click', cancelFeedback);
+
+        // bind detail view event
+        Y.one('#snapshot-detail-view .cp').on('click', copyFeedback);
+        Y.one('#snapshot-detail-view .x').on('click', hideDetailInfoView);
     }
 
     function handleEditEvent(e) {
@@ -142,9 +146,13 @@ Y.use('node', 'event', 'json-stringify', 'json-parse', function(Y) {
         }
     }
 
+    function viewFeedback() {
+        showDetailInfoView();
+    }
+
     function copyFeedback() {
         alert('Feedback is copied!');
-        showInternalComponent();
+        hideDetailInfoView();
     }
 
     function cancelFeedback() {
@@ -242,5 +250,39 @@ Y.use('node', 'event', 'json-stringify', 'json-parse', function(Y) {
         }
     }
 
+    function showDetailInfoView() {
+        // render window.YSnapShotInfo
+        var infoview = Y.one('#snapshot-detail-view'),
+            info = composeDetailInfoViewHtml(window.YSnapShotInfo);
+        
+        infoview.one('.info').setHTML(info);
+        infoview.setStyle('display', 'block');
+    }
+
+    function hideDetailInfoView() {
+        var infoview = Y.one('#snapshot-detail-view');
+        infoview.setStyle('display', 'none');
+    }
+
+    function composeDetailInfoViewHtml(infoObj) {
+        var info = '<ul>';
+        for (var i in infoObj) {
+            var line = '<li>' + i.toUpperCase() + ': ',
+                val;
+
+            val = window.YSnapShotInfo[i];
+            switch(typeof(val)) {
+                case 'string':
+                    line = line + val;
+                    break;
+                case 'object':
+                    line = line + Y.JSON.stringify(val);
+                    break;
+            }
+            info = info + line + '</li>';
+        }
+
+        return info + '</ul>';
+    }
 
 });
