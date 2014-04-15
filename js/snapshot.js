@@ -1,6 +1,7 @@
 //YUI().use('node', 'json-stringify', function(Y) {
-Y.use('node', 'event', 'json-stringify', 'json-parse', function(Y) {
+Y.use('node', 'event', 'json-stringify', 'json-parse', 'escape', function(Y) {
     "use strict";
+    var allowTaint = false;
 
     // bind overlay events
     bindOverlayEvents();
@@ -31,7 +32,7 @@ Y.use('node', 'event', 'json-stringify', 'json-parse', function(Y) {
             },
             //proxy: 'http://...',
             //useCORS: true,
-            allowTaint: true,
+            allowTaint: allowTaint,
             logging: true
         });
     }
@@ -278,13 +279,15 @@ Y.use('node', 'event', 'json-stringify', 'json-parse', function(Y) {
     function showDetailInfoView() {
         // render window.YSnapShotInfo
         var infoview = Y.one('#snapshot-detail-view'),
-            info;
+            info, tmpObj;
         
         // add user id and description
-        window.YSnapShotInfo['backyardid'] = getInfo('backyardid');
-        window.YSnapShotInfo['loc'] = getInfo('location');
-        window.YSnapShotInfo['summary'] = getInfo('description');
-        info = composeDetailInfoViewHtml(tmpObj);
+        tmpObj = {};
+        tmpObj['backyardid'] = getInfo('backyardid');
+        tmpObj['loc'] = getInfo('location');
+        tmpObj['summary'] = getInfo('description');
+        console.log(Y.merge(window.YSnapShotInfo, tmpObj));
+        info = composeDetailInfoViewHtml(Y.merge(window.YSnapShotInfo, tmpObj));
 
         infoview.one('.info').setHTML(info);
         infoview.setStyle('display', 'block');
@@ -301,7 +304,7 @@ Y.use('node', 'event', 'json-stringify', 'json-parse', function(Y) {
             var line = '<li>' + i.toUpperCase() + ': ',
                 val;
 
-            val = window.YSnapShotInfo[i];
+            val = infoObj[i];
             switch(typeof(val)) {
                 case 'string':
                     line = line + val;

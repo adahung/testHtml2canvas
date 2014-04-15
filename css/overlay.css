@@ -116,7 +116,7 @@
     right: 0;
     
     margin: auto;
-    width: 220px;
+    width: 240px;
 }
 
 #snapshot-submit,
@@ -127,7 +127,7 @@
     border-radius: 2px;
     background-color: #3261c3;
     height: 38px;
-    width: 60px;
+    width: 70px;
     color: #fff;
     padding: 5px 10px;
 
@@ -151,9 +151,12 @@
 
 #snapshot-detail-view {
     display: none;
-    padding: 10px;
+    padding: 15px;
 }
-
+#snapshot-detail-view .info ul {
+    list-style: none;
+    padding: 0;
+}
 #snapshot-detail-view .info li {
     padding-bottom: 5px;
 }
