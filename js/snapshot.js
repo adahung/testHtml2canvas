@@ -1,7 +1,7 @@
 //YUI().use('node', 'json-stringify', function(Y) {
 Y.use('node', 'event', 'json-stringify', 'json-parse', 'escape', function(Y) {
     "use strict";
-    var allowTaint = false;
+    var allowTaintVal = false;
 
     // bind overlay events
     bindOverlayEvents();
@@ -32,7 +32,7 @@ Y.use('node', 'event', 'json-stringify', 'json-parse', 'escape', function(Y) {
             },
             //proxy: 'http://...',
             //useCORS: true,
-            allowTaint: allowTaint,
+            allowTaint: allowTaintVal,
             logging: true
         });
     }
