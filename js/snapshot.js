@@ -100,6 +100,32 @@ Y.use('node', 'event', 'json-stringify', 'json-parse', function(Y) {
         }
     }
 
+    function getInfo(field) {
+        var id;
+
+        switch(field) {
+            case 'backyardid':
+                id = '#snapshot-info-usr';
+                break;
+            case 'description':
+                id = '#snapshot-info-desc';
+                break;
+            case 'query':
+                id = '#snapshot-info-qry';
+                break;
+            case 'location':
+                id = '#snapshot-info-loc';
+                break;
+        }
+
+        if (typeof id !== 'undefined') {
+            if (field == 'location')
+                return Y.JSON.parse(Y.one(id).one('.value').get('text'));
+            else
+                return Y.one(id).one('.value').get('text');
+        }
+    }
+
     function bindOverlayEvents() {
         // bind edit button click events
         Y.all('.snapshot-info-item .edit').each(function(item) {
@@ -182,8 +208,7 @@ Y.use('node', 'event', 'json-stringify', 'json-parse', function(Y) {
     }
 
     function setGeolocationIntoLocField(coords) {
-        var loc = Y.one('#snapshot-info-loc .value').get('text');
-        loc = Y.JSON.parse(loc);
+        var loc = getInfo('location');
         loc.geolat = coords.latitude;
         loc.geolon = coords.longitude;
         
@@ -253,8 +278,14 @@ Y.use('node', 'event', 'json-stringify', 'json-parse', function(Y) {
     function showDetailInfoView() {
         // render window.YSnapShotInfo
         var infoview = Y.one('#snapshot-detail-view'),
-            info = composeDetailInfoViewHtml(window.YSnapShotInfo);
+            info;
         
+        // add user id and description
+        window.YSnapShotInfo['backyardid'] = getInfo('backyardid');
+        window.YSnapShotInfo['loc'] = getInfo('location');
+        window.YSnapShotInfo['summary'] = getInfo('description');
+        info = composeDetailInfoViewHtml(tmpObj);
+
         infoview.one('.info').setHTML(info);
         infoview.setStyle('display', 'block');
     }

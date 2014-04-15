@@ -11,3 +11,4 @@ window.YSnapShotInfo = {
     },
     useragent: 'Mozilla...'
 };
+
