@@ -1,7 +1,8 @@
 //YUI().use('node', 'json-stringify', function(Y) {
 Y.use('node', 'event', 'json-stringify', 'json-parse', 'escape', function(Y) {
     "use strict";
-    var allowTaintVal = false;
+    var allowTaintVal = false,
+        html2canvasProxy = 'http://0.0.0.0:8000/';;
 
     // bind overlay events
     bindOverlayEvents();
@@ -30,8 +31,8 @@ Y.use('node', 'event', 'json-stringify', 'json-parse', 'escape', function(Y) {
                 console.log('rendered');
                 afterSnapshot(canvas);
             },
-            //proxy: 'http://...',
-            //useCORS: true,
+            proxy: html2canvasProxy,
+            useCORS: true,
             allowTaint: allowTaintVal,
             logging: true
         });
