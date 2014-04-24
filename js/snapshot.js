@@ -287,7 +287,8 @@ Y.use('node', 'event', 'json-stringify', 'json-parse', 'escape', function(Y) {
         tmpObj['backyardid'] = getInfo('backyardid');
         tmpObj['loc'] = getInfo('location');
         tmpObj['summary'] = getInfo('description');
-        tmpObj['windowUrl'] = document.URL;
+        tmpObj['windowurl'] = document.URL;
+        tmpObj['windowCleanUrl'] = getCleanUrl(document.URL);
         console.log(Y.merge(window.YSnapShotInfo, tmpObj));
         info = composeDetailInfoViewHtml(Y.merge(window.YSnapShotInfo, tmpObj));
 
@@ -319,6 +320,12 @@ Y.use('node', 'event', 'json-stringify', 'json-parse', 'escape', function(Y) {
         }
 
         return info;
+    }
+
+    function getCleanUrl(url) {
+        url = url.replace(/;_ylt=[^;?]*/g, '');
+        url = url.replace(/;_ylu=[^;?]*/g, '');
+        return url;
     }
 
 });
