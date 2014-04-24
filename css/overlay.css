@@ -122,7 +122,7 @@
 #snapshot-submit,
 #snapshot-cancel,
 #snapshot-view,
-#snapshot-detail-view a {
+#snapshot-detail-view .actn a {
     border: none;
     border-radius: 2px;
     background-color: #3261c3;
@@ -135,8 +135,8 @@
     cursor: pointer;
     display: inline-block;
 }
-#snapshot-detail-view a {
-    margin-top: 15px;
+#snapshot-detail-view .actn a {
+    margin-bottom: 15px;
     text-decoration: none;
     line-height: 38px;
     padding: 0 10px;
