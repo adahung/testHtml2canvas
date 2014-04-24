@@ -289,10 +289,15 @@ Y.use('node', 'event', 'json-stringify', 'json-parse', 'escape', function(Y) {
         tmpObj['summary'] = getInfo('description');
         tmpObj['windowurl'] = document.URL;
         tmpObj['windowCleanUrl'] = getCleanUrl(document.URL);
+        tmpObj['mCk'] = getCookie('M');
         console.log(Y.merge(window.YSnapShotInfo, tmpObj));
-        info = composeDetailInfoViewHtml(Y.merge(window.YSnapShotInfo, tmpObj));
-
+        info = composeDetailInfoViewHtml(Y.merge(window.YSnapShotInfo, tmpObj), '<br><br>');
         infoview.one('.info').setHTML(info);
+
+        info = composeDetailInfoViewHtml(Y.merge(window.YSnapShotInfo, tmpObj), '\n\r');
+        var mailto = composeMailDetailInfoViewHtml(info, tmpObj);
+        infoview.one('a.mail').setAttribute('href', mailto);
+
         infoview.setStyle('display', 'block');
     }
 
@@ -301,7 +306,7 @@ Y.use('node', 'event', 'json-stringify', 'json-parse', 'escape', function(Y) {
         infoview.setStyle('display', 'none');
     }
 
-    function composeDetailInfoViewHtml(infoObj) {
+    function composeDetailInfoViewHtml(infoObj, separator) {
         var info = '';
         for (var i in infoObj) {
             var line = i.toUpperCase() + ': ',
@@ -316,10 +321,34 @@ Y.use('node', 'event', 'json-stringify', 'json-parse', 'escape', function(Y) {
                     line = line + Y.JSON.stringify(val);
                     break;
             }
-            info = info + line + '<br><br>';
+            info = info + line + separator;
         }
 
         return info;
+    }
+
+    function composeMailDetailInfoViewHtml(info, infoObj) {
+        // mailto:
+        // bkid mail
+        // subject
+        // body
+        var mail = 'mailto:';
+
+        if (infoObj.backyardid) {
+            mail += infoObj.backyardid + '@yahoo.com.tw';
+        }
+        
+        mail += '?';
+        mail += 'cc=adaihung@yahoo.com.tw';
+        
+        if (infoObj.summary) {
+            mail += '&subject=' + encodeURIComponent(infoObj.summary);
+        }
+
+        mail += '&body=' + encodeURIComponent(info, infoObj);
+
+        return mail;
+
     }
 
     function getCleanUrl(url) {
@@ -328,4 +357,10 @@ Y.use('node', 'event', 'json-stringify', 'json-parse', 'escape', function(Y) {
         return url;
     }
 
-});
+    function getCookie(name) {
+      var regexp = new RegExp("(?:^" + name + "|;\s*"+ name + ")=(.*?)(?:;|$)", "g");
+      var result = regexp.exec(document.cookie);
+      return (result === null) ? null : result[1];
+    }
+
+}); 
