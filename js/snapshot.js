@@ -287,6 +287,7 @@ Y.use('node', 'event', 'json-stringify', 'json-parse', 'escape', function(Y) {
         tmpObj['backyardid'] = getInfo('backyardid');
         tmpObj['loc'] = getInfo('location');
         tmpObj['summary'] = getInfo('description');
+        tmpObj['windowUrl'] = document.URL;
         console.log(Y.merge(window.YSnapShotInfo, tmpObj));
         info = composeDetailInfoViewHtml(Y.merge(window.YSnapShotInfo, tmpObj));
 
@@ -300,9 +301,9 @@ Y.use('node', 'event', 'json-stringify', 'json-parse', 'escape', function(Y) {
     }
 
     function composeDetailInfoViewHtml(infoObj) {
-        var info = '<ul>';
+        var info = '';
         for (var i in infoObj) {
-            var line = '<li>' + i.toUpperCase() + ': ',
+            var line = i.toUpperCase() + ': ',
                 val;
 
             val = infoObj[i];
@@ -314,10 +315,10 @@ Y.use('node', 'event', 'json-stringify', 'json-parse', 'escape', function(Y) {
                     line = line + Y.JSON.stringify(val);
                     break;
             }
-            info = info + line + '</li>';
+            info = info + line + '<br><br>';
         }
 
-        return info + '</ul>';
+        return info;
     }
 
 });
